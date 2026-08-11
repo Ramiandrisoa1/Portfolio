@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Mickaël Ramiandrisoa — Portfolio"
+description = "A premium bilingual portfolio for Full Stack JavaScript developer Mickaël Ramiandrisoa, built from his provided CV with responsive navigation, theme switching, project and experience showcases, and a prepared contact form."
+version = "1.0.0"
+id = "artifacts/portfolio-mickael"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22780
+
+[services.development]
+run = "pnpm --filter @workspace/portfolio-mickael run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/portfolio-mickael", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/portfolio-mickael/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22780"
+BASE_PATH = "/"
