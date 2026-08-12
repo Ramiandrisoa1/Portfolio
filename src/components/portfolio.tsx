@@ -38,6 +38,7 @@ export function Portfolio() {
 
   const jump = (id: string) => { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); setMenu(false); };
   return <div className="noise min-h-[100dvh] overflow-x-hidden bg-background text-foreground">
+    <div className="fixed left-0 top-0 z-[60] h-1 bg-background w-full transition-[width] duration-150"/>
     <div className="fixed left-0 top-0 z-[60] h-1 bg-primary transition-[width] duration-150" style={{ width: `${progress}%` }} />
     <div className="pointer-events-none fixed -left-40 top-20 h-96 w-96 rounded-full bg-primary/10 blur-3xl ambient-drift" />
     <div className="pointer-events-none fixed -right-40 top-[45%] h-96 w-96 rounded-full bg-accent/10 blur-3xl ambient-drift" style={{ animationDelay: '-5s' }} />
@@ -64,7 +65,74 @@ export function Portfolio() {
           <Reveal delay={.16}><p className="mt-9 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">{t.heroText}</p></Reveal>
           <Reveal delay={.24}><div className="mt-10 flex flex-wrap gap-3"><button data-testid="button-view-work" onClick={() => jump('experience')} className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">{t.viewWork}<ArrowDown size={16} /></button><button data-testid="button-contact-hero" onClick={() => jump('contact')} className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-semibold transition-colors hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">{t.contactMe}<ArrowUpRight size={16} /></button></div></Reveal>
         </div>
-        <Reveal delay={.28} className="relative hidden lg:block"><div className="relative aspect-square max-w-[430px] justify-self-end rounded-[2rem] border border-border bg-card p-8 shadow-2xl shadow-primary/5"><div className="absolute inset-5 rounded-[1.4rem] border border-dashed border-primary/30" /><div className="flex h-full flex-col justify-between"><div className="flex items-center justify-between font-mono-app text-[10px] uppercase tracking-widest text-muted-foreground"><span>JS / FS</span><span>MG · 101</span></div><div><div className="mb-5 font-mono-app text-sm text-primary">01&nbsp; 10&nbsp; 11&nbsp; 00</div><p className="max-w-xs font-display text-3xl font-semibold leading-tight">From interface to infrastructure.</p></div><div className="flex items-end justify-between"><span className="font-mono-app text-xs text-muted-foreground">MRA / 2024</span><div className="grid size-14 place-items-center rounded-full border border-primary text-primary"><ArrowUpRight size={21} /></div></div></div></div></Reveal>
+        <Reveal delay={0.28} className="relative hidden lg:block">
+          <motion.div
+            initial={{
+              opacity: 0,
+              scale: 0.92,
+              y: 30,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 1,
+              delay: 0.15,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            whileHover={{
+              scale: 1.02,
+              y: -6,
+            }}
+            className="relative ml-auto max-w-[430px]"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 0.35, scale: 1 }}
+              transition={{
+                duration: 1.2,
+                delay: 0.4,
+                ease: "easeOut",
+              }}
+              className="pointer-events-none absolute -inset-10 rounded-full bg-primary/20 blur-3xl"
+            />
+            <motion.img
+              src="/images/profil.png"
+              alt="Photo"
+              initial={{
+                opacity: 0,
+                scale: 1.08,
+              }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+              }}
+              transition={{
+                duration: 1.3,
+                delay: 0.25,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              whileHover={{
+                scale: 1.04,
+              }}
+              className="relative z-10 w-full object-contain"
+            />
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{
+                duration: 0.6,
+                delay: 1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="absolute bottom-8 left-4 z-20 rounded-full bg-background/80 px-4 py-2 font-mono-app text-[10px] uppercase tracking-[0.18em] text-primary shadow-lg backdrop-blur-md"
+            >
+              {t.fullStackDeveloper}
+            </motion.div>
+          </motion.div>
+        </Reveal>
       </section>
 
       <section id="about" className="scroll-mt-28 border-t border-border/60"><div className="mx-auto max-w-7xl px-5 py-28 lg:px-10"><SectionHead index="01" label={t.profileLabel} title={t.profileTitle} /><div className="grid gap-10 lg:grid-cols-[1.2fr_.8fr]"><Reveal><p className="max-w-3xl text-xl leading-relaxed text-muted-foreground md:text-2xl">{t.profileText}</p></Reveal><Reveal delay={.12}><div className="grid gap-5 border-l border-primary/60 pl-6 text-sm"><div><p className="font-mono-app text-[10px] uppercase tracking-widest text-muted-foreground">Based in</p><p className="mt-2 flex gap-2 font-semibold"><MapPin size={15} className="text-primary" />Antananarivo, Madagascar</p></div><div><p className="font-mono-app text-[10px] uppercase tracking-widest text-muted-foreground">Birthday</p><p className="mt-2 font-semibold">{t.birth}</p></div><div><p className="font-mono-app text-[10px] uppercase tracking-widest text-muted-foreground">Focus</p><p className="mt-2 font-semibold">JavaScript · Full Stack</p></div></div></Reveal></div></div></section>
